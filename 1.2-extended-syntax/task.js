@@ -20,25 +20,25 @@ function getResult(a, b, c) {
 
 function getAverageMark(marks) {
     
-    console.log("Количество оценок: " + marks.length);     
-    
+    let sum = 0;
+    let averageMark = 0;
+
+    console.log("Количество оценок: " + marks.length);
+
     if (marks.length == 0) {
         return 0;
-    } else if (marks.length > 5); {
-        console.log("Количество оценок больше 5");
+    } else if (marks.length > 5) {
+        console.log("Количество оценок больше 5!");
         marks.splice(5);
+    } else {
+        for (let i = 0; i <= marks.length; i++) {
+            sum += marks[i];            
+        };        
     };
-    
-    let sum;
 
-    for (let i = 0; i <= marks.length; i++) {
-        sum = (sum + marks[i]);
-    }; 
-
-    let averageMark = (sum / marks.length);
+    averageMark = sum / marks.length;
 
     return averageMark;
-    
 }
 
 function askDrink(name, dateOfBirthday) {
