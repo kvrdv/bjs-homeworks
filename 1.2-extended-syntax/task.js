@@ -30,11 +30,13 @@ function getAverageMark(marks) {
     } else if (marks.length > 5) {
         console.log("Количество оценок больше 5!");
         marks.splice(5);
-    } else {
-        for (let i = 0; i <= marks.length; i++) {
-            sum += marks[i];            
-        };        
     };
+    
+    
+    for (let i = 0; i < marks.length; i++) {
+        sum += marks[i];            
+    };        
+    
 
     averageMark = sum / marks.length;
 
