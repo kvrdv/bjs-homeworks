@@ -33,7 +33,7 @@ class AlarmClock {
 
   getCurrentFormattedTime() {
     let time = new Date();
-    return time.getHours() + ":" + (time.getMinutes() < 10 ? "0" : "") + time.getMinutes();
+    return (time.getHours() < 10 ? "0" : "") + time.getHours() + ":" + (time.getMinutes() < 10 ? "0" : "") + time.getMinutes();
   }
 
   start() {
@@ -41,7 +41,7 @@ class AlarmClock {
       this.alarmCollection.forEach(item => {
         if (item.time == this.getCurrentFormattedTime()) {
           item.callback();
-          this.removeClock(item.id);
+          // this.removeClock(item.id);
         }
       });
     }
@@ -71,13 +71,22 @@ class AlarmClock {
   }
 }
 
-function testCase() {
-  const phoneAlarm = new AlarmClock();
-  phoneAlarm.addClock("20:01", () => console.log("Скоро спать"), 1);
-  phoneAlarm.addClock("20:02", () => { console.log("Пора готовиться ко сну!"); phoneAlarm.removeClock(2); }, 2);
-  phoneAlarm.addClock("20:03", () => console.log("Иди умываться"));
-  phoneAlarm.addClock("20:04", () => { console.log("Иди спать, завтра рано на работу!"); phoneAlarm.clearAlarms(); phoneAlarm.printAlarms(); }, 3);
-  phoneAlarm.addClock("21:05", () => console.log("Иди спать, завтра рано на работу!"), 1);
+function testCase() { 
+  let phoneAlarm = new AlarmClock();
+
+  phoneAlarm.addClock("15:30", () => console.log("Скоро спать"), 1);
+
+  phoneAlarm.addClock("15:31", () => {console.log("Пора готовиться ко сну!"); phoneAlarm.removeClock(2)}, 2);
+
+  phoneAlarm.addClock("15:31", () => console.log("Иди умываться"));//отсутствует id
+  
+  phoneAlarm.addClock("15:32", () => {
+      console.log("Иди спать, завтра рано на работу!");
+      phoneAlarm.clearAlarms();
+      phoneAlarm.printAlarms();
+      },3);
+  phoneAlarm.addClock("15:30", () => console.log("Иди спать, завтра рано на работу!"),1);//существующий id
+
   phoneAlarm.printAlarms();
   phoneAlarm.start();
 }
